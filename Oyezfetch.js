@@ -46,7 +46,7 @@ function getCase(term,docket, callback) {
 
     function displayCase(json){
         var params = new URLSearchParams(window.location.search);
-        url = "https:/www.oyez.org/cases/" + params.get("term") + "/"+ params.get("docket")
+        url = "https://www.oyez.org/cases/" + params.get("term") + "/"+ params.get("docket")
         document.getElementById("name").innerText = json.name
         document.title = json.name + "(" + json.citation.year + ")"
         document.getElementById("question").innerHTML = json.question;
