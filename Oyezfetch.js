@@ -17,10 +17,10 @@ function displayRandomCase(){
 
 }
 function updateCase() {
-    var params = new URLSearchParams(window.location.search);
-    var term = params.get("term")
-    var docket = params.get("docket")
-getCase(term,docket, data => displayCase(data))
+    const params = new URLSearchParams(window.location.search);
+    const term = params.get("term");
+    const docket = params.get("docket");
+    getCase(term,docket, data => displayCase(data))
 function getCase(term,docket, callback) {
         fetch("./terms/"+ term + ".json")
             .then(response => {
@@ -30,8 +30,8 @@ function getCase(term,docket, callback) {
                 return response.json();
             })
             .then(data => {
-                for (i in data){
-                    if(data[i].docket_number == docket)
+                for (let i in data){
+                    if(data[i].docket_number === docket)
                         callback(data[i])
                 }
                 callback(null);
@@ -45,8 +45,8 @@ function getCase(term,docket, callback) {
 // Example usage:
 
     function displayCase(json){
-        var params = new URLSearchParams(window.location.search);
-        url = "https://www.oyez.org/cases/" + params.get("term") + "/"+ params.get("docket")
+        const params = new URLSearchParams(window.location.search);
+        let url = "https://www.oyez.org/cases/" + params.get("term") + "/" + params.get("docket")
         document.getElementById("name").innerText = json.name
         document.title = json.name + "(" + json.citation.year + ")"
         document.getElementById("question").innerHTML = json.question;
@@ -54,7 +54,7 @@ function getCase(term,docket, callback) {
         document.getElementById("facts").innerHTML = json.facts_of_the_case
         document.getElementById("conclusion").innerHTML = json.conclusion
         document.getElementById("year").innerText = ' (' + json.citation.year + ')';
-        var votes = json["decisions"][0]["votes"]
+        const votes = json["decisions"][0]["votes"];
         let maj = "";
         let min = "";
         let none = "";
