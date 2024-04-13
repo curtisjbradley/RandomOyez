@@ -1,36 +1,59 @@
 displayRandomCase()
 function displayRandomCase(){
-    fetch('./urls.json').then(data => data.json()).then(json => {
-        const year_int = Math.floor(Math.random() * Object.keys(json).length);
-        console.log(year_int)
-
-        var caseSplit = json[year_int].toString().split("/")
-        const nextURL = window.location.pathname +"?term="+ caseSplit[1]+"&docket="+caseSplit[2];
+    fetch('./cases.json').then(data => data.json()).then(json => {
+        const year_int= Math.floor(Math.random() * Object.keys(json).length);
+        const year = Object.keys(json)[year_int];
+        const docket = json[year][Math.floor(Math.random() * json[year].length)];
+        const nextURL = window.location.pathname +"?term="+ year+"&docket="+docket;
         const nextTitle = 'Test';
         const nextState = { additionalInformation: 'Updated the URL with JS' };
 
         window.history.pushState(nextState, nextTitle, nextURL);
 
         window.history.replaceState(nextState, nextTitle, nextURL);
-        displayCase()
+        updateCase()
     })
 
 
 }
-function displayCase() {
+function updateCase() {
     var params = new URLSearchParams(window.location.search);
-    url = "https:/api.oyez.org/cases/" + params.get("term") + "/"+ params.get("docket")
+    var term = params.get("term")
+    var docket = params.get("docket")
+getCase(term,docket, data => displayCase(data))
+function getCase(term,docket, callback) {
+        fetch("./terms/"+ term + ".json")
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                for (i in data){
+                    if(data[i].docket_number == docket)
+                        callback(data[i])
+                }
+                callback(null);
+            })
+            .catch(error => {
+                console.error('Error reading JSON file:', error);
+                callback(null);
+            });
+    }
 
-    fetch(url).then(res =>
-        res.json()).then(json => {
-            document.getElementById("name").innerText = json.name
+// Example usage:
+
+    function displayCase(json){
+        var params = new URLSearchParams(window.location.search);
+        url = "https:/www.oyez.org/cases/" + params.get("term") + "/"+ params.get("docket")
+        document.getElementById("name").innerText = json.name
         document.title = json.name + "(" + json.citation.year + ")"
         document.getElementById("question").innerHTML = json.question;
         document.getElementById("name").setAttribute("href", url);
         document.getElementById("facts").innerHTML = json.facts_of_the_case
         document.getElementById("conclusion").innerHTML = json.conclusion
         document.getElementById("year").innerText = ' (' + json.citation.year + ')';
-        document.getElementById("decision").innerText = json.decisions[0].description
         var votes = json["decisions"][0]["votes"]
         let maj = "";
         let min = "";
@@ -55,8 +78,6 @@ function displayCase() {
         document.getElementById("majority").innerText = maj;
         document.getElementById("minority").innerText = min;
         document.getElementById("no-vote").innerText = none;
-    });
 
-
-
+    }
 }
