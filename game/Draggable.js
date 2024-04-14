@@ -7,6 +7,13 @@ var positions = [[200,200], [400,200], [600,200],[800,200],[1000,200]]
 let cases = [null,null,null,null,null]
 reorder(null)
 const width = 150;
+
+for (let i = 0; i < 5; i++) {
+    console.log("year" + (i+1))
+    let el =     document.getElementById("year" + (i+1));
+    console.log(el);
+    el.style.opacity = '0';
+}
 function dragElement(elmnt) {
 
     var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
@@ -125,6 +132,12 @@ function loadCase(json,number){
 }
 
 function displayData(caseNumber){
+    if(submitted){
+        let json = cases[caseNumber-1];
+        window.open("case.html?term=" + json.term + "&docket=" + json.docket_number,"_blank").focus();
+        return;
+    }
+
     showingInfo = true;
     for(el in locations){
         locations[el].hidden = true;
@@ -156,8 +169,6 @@ function submitToRuling(){
     submitted = true;
     document.getElementById("submit").hidden=true;
     for(el in locations){
-        console.log(el)
-        console.log(locations[el])
         let header = document.getElementById(locations[el].id + "header");
        header.onmousedown = null;
         header.style.cursor = "auto";
@@ -205,7 +216,7 @@ function submitToRuling(){
                     correctOrder.push(c);
                 }
             }
-            correctErrors(order,correctOrder,years);
+            correctErrors(order,correctOrder,sortedYears);
             return;
         }
     }
@@ -215,7 +226,27 @@ function celebrate(){
 
 }
 function correctErrors(order, correctOrder,years){
-    console.log(years)
+    console.log(order)
     console.log(correctOrder)
+    for (let i = 0; i < correctOrder.length; i++) {
+        let el = document.getElementById("case" + (correctOrder[i]+1));
+        console.log(el.id)
+        el.style.transition = "all 3s ease-in-out"
+        el.style.left = positions[i][0] + 'px';
+        el.style.top = positions[i][1] + 'px';
+        console.log(positions[i]);
+        console.log(el.style.left)
+        console.log(el.style.top);
+         (new Promise(resolve => setTimeout(resolve, 3000)).then(() => el.style.transition = null).then(r => setTimeout(r,500)).then(() =>{
+             let yearEL = document.getElementById("year" + (correctOrder[i] + 1));
+             yearEL.style.left = positions[i][0] + 'px';
+             yearEL.style.top = positions[i][1] + 260 + 'px';
+             yearEL.innerText = years[i];
+             yearEL.style.opacity = 1;
+         }));
+
+
+    }
+
 
 }

@@ -18,10 +18,10 @@
         }
 
         populateTerms()
-        window.addEventListener("resize", function(event){
+        window.addEventListener("resize", function(){
             document.getElementById("case-data").style.marginTop = document.getElementById("header").offsetHeight + 50+ "px";
         })
-        window.addEventListener('popstate', function(event) {
+        window.addEventListener('popstate', function() {
             updateCase()
         });
     </script>
@@ -34,7 +34,7 @@
 <body class="body">
 
 <div class="header" id="header">
-    <a href="index.html" class="name" style="left: 0; margin:0; text-decoration: none;text-emphasis: white">⌂</a>
+    <button onclick="window.open('index.html','_self').focus()" class="name" style="" id="home-button" >⌂</button>
     <a id="name" target="_blank" class="name" style="margin-left: 0"></a>
     <span id="year" class="year"></span>
 </div>

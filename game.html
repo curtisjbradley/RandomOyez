@@ -16,6 +16,10 @@
 </head>
 
 <body onclick="closeCaseData()">
+<header>
+
+    <button onclick="window.open('index.html','_self').focus()" class="icon-button">Home</button>
+    Supreme Court Case Game</header>
 
 <div id="case-container">
     <div id="case1" class="case">
@@ -48,8 +52,13 @@
             <p>May a property owner who acquired title to the property after it was subject to wetlands regulations still bring a takings claim under the Fifth Amendment?</p>
         </div>
     </div>
-    <script src="game/Draggable.js"></script>
+
         <button id="submit" onclick="submitToRuling()">Submit</button>
+    <span id="year1" hidden="hidden" class="year">Test</span>
+    <span id="year2" hidden="hidden" class="year">Test</span>
+    <span id="year3" hidden="hidden" class="year">Test</span>
+    <span id="year4" hidden="hidden" class="year">Test</span>
+    <span id="year5" hidden="hidden" class="year">Test</span>
 
 </div>
 <div id="case-info" hidden="hidden">
@@ -70,4 +79,6 @@
 </div>
 
 </body>
+
+<script src="game/Draggable.js"></script>
 </html>

@@ -83,3 +83,20 @@ color: grey;
     width: 100%;
     padding-top:20px;
 }
+#home-button{
+    left: 0;text-decoration: none;text-emphasis: white;
+    border: none;
+    background-color: #8dc8e5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    text-align: center;
+    padding-left:25px;
+    padding-right:25px;
+
+}
+#home-button:hover{
+    background-color: #023047;
+    color:white;
+}
