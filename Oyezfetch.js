@@ -1,3 +1,11 @@
+function getRandomCase(callback){
+    fetch('./randomcase/cases.json').then(data => data.json()).then(json => {
+        const year_int = Math.floor(Math.random() * Object.keys(json).length);
+        const year = Object.keys(json)[year_int];
+        const docket = json[year][Math.floor(Math.random() * json[year].length)];
+        getCase(year,docket,cb=> {callback(cb)});
+    })
+}
 function getCase(term,docket, callback) {
         fetch("./randomcase/terms/"+ term + ".json")
             .then(response => {

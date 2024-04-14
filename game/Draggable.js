@@ -1,10 +1,9 @@
 var locations = [document.getElementById("case1"),document.getElementById("case2"),document.getElementById("case3"),document.getElementById("case4"),document.getElementById("case5")];
 for(e in locations){
-    console.log(e)
     dragElement(locations[e])
 }
 var positions = [[200,200], [400,200], [600,200],[800,200],[1000,200]]
-
+let cases = [null,null,null,null,null]
 reorder(null)
 const width = 150;
 function dragElement(elmnt) {
@@ -52,18 +51,17 @@ function dragElement(elmnt) {
         const target =  document.getElementById(e.target.id.replace("header",""));
 
         let newLocs = []
-        if(insertAt == -1){newLocs[0] = target}
+        if(insertAt === -1){newLocs[0] = target}
 
         for(let i = 0; i < locations.length; i++) {
             if(insertAt === i){
                 newLocs.push(target)
             }
-            if(locations[i] == target){continue}
+            if(locations[i] === target){continue}
             if(locations[i] == null || locations[i].id.endsWith("text")){continue}
             newLocs.push(locations[i]);
         }
         if(insertAt > locations.length-1){newLocs.push(target)}
-        console.log(insertAt)
         locations = newLocs;
         reorder(target);
 
@@ -89,13 +87,12 @@ function resize(element,desired){
     while (element.clientHeight > desired) {
         const style = window.getComputedStyle(element, null).getPropertyValue('font-size');
         const size = parseFloat(style);
-        if(size == 0) break;
+        if(size === 0) break;
         element.style.fontSize = size-1 + 'px'
     }
 
 }
 function reorder(exclude){
-    console.log(locations);
     let counter = -1;
 
     for (var i = 0; i < locations.length; i++) {
@@ -114,4 +111,38 @@ function getOrder(){
         order.push(parseInt(locations[i].id.replace("case","")));
     }
     return order;
+}
+
+function loadCase(json,number){
+    let header = document.getElementById("case" + number + "header");
+    let text = document.getElementById("case" + number + "text");
+    text.innerHTML = json.question;
+    header.innerHTML = json.name;
+    resize(header,75);
+    resize(text,175);
+    cases[number -1] = json;
+}
+
+function displayData(caseNumber){
+    for(el in locations){
+        locations[el].hidden = true;
+    }
+    document.getElementById("submit").hidden=true;
+    let data = document.getElementById("case-info");
+    data.hidden=false;
+    json = cases[caseNumber -1];
+    document.getElementById("case-title").innerHTML = json.name;
+    document.getElementById("case-facts").innerHTML = json.facts_of_the_case;
+    document.getElementById("case-question").innerHTML= json.question;
+    document.getElementById("case-ruling").innerHTML = json.conclusion;
+
+}
+function closeCaseData(){
+    let data = document.getElementById("case-info");
+    document.getElementById("submit").hidden=false;
+    data.hidden=true;
+    for(el in locations){
+        locations[el].hidden = false;
+    }
+
 }

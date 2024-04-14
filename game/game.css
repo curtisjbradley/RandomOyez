@@ -9,7 +9,7 @@
     top:200px;
 }
 .case-header{
-    cursor: move;
+    cursor: grab;
     background: blue;
     color: white;
     padding: 10px;
@@ -22,4 +22,43 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor:help;
+}
+.source{
+    position: absolute;
+    bottom: 0;
+    background-color: #023047;
+    color: azure;
+    justify-content: center;
+    display:flex;
+    width: 100%;
+    padding-top:20px;
+}
+#case-info{
+    position: absolute;
+    top:10%;
+    left:10%;
+    height: 75%;
+    width: 75%;
+    background-color: #023047;
+    color: white;
+    animation: fade-in 2s;
+
+}
+#submit{
+    position: absolute;
+    top: 500px;
+    left: 50%;
+}
+@keyframes fade-in {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+
+}
+.data-header{
+    font-size: 30px
 }

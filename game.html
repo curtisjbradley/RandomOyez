@@ -6,6 +6,11 @@
     <script src="Oyezfetch.js"></script>
 
     <link href="game/game.css" rel="stylesheet">
+    <script>
+        for(let i = 1; i<= 5; i++){
+            getRandomCase(cb => loadCase(cb,i))
+        }
+    </script>
 
 </head>
 
@@ -14,39 +19,53 @@
 <div id="case-container">
     <div id="case1" class="case">
         <div id="case1header" class="case-header">Board of Education of Kiryas Joel Village School District v. Grumet</div>
-        <div id="case1text" class="case-text">
+        <div id="case1text" class="case-text" onclick="displayData(1)">
             <p>Did the 1989 statute violate the First Amendment's Establishment?</p>
         </div>
     </div>
     <div id="case2" class="case" style="left: 200px">
         <div id="case2header" class="case-header">Chevron U.S.A., Inc. v. Echazabal</div>
-        <div id="case2text" class="case-text">
+        <div id="case2text" class="case-text" onclick="displayData(2)">
             <p>Does the Americans with Disabilities Act of 1990 permit the Equal Employment Opportunity Commission's regulation that allows the defense that a worker's disability on the job would pose a direct threat to his health?</p>
         </div>
     </div>
     <div id="case3" class="case" style="left: 400px">
         <div id="case3header" class="case-header">Freytag v. Commissioner</div>
-        <div id="case3text" class="case-text">
+        <div id="case3text" class="case-text" onclick="displayData(3)">
             <p>Does 26 U.S.C. 7443A(a) permit the assignment of particularly complex cases dealing with large amounts of money to "special trial judges" appointed by the Chief Judge of the U.S. Tax Court, provided that the special trial judges do not enter the decision but simply prepare an opinion for review and adoption by a regular Tax Court judge? Under the Appointments Clause of Article II Section 2, may Congress permit the Chief Judge of the U.S. Tax Court to appoint "special trial judges" to "any other proceeding which the chief judge may designate"?</p>
         </div>
     </div>
     <div id="case4" class="case" style="left: 600px">
         <div id="case4header" class="case-header">Republic of Philippines v. Pimentel</div>
-        <div id="case4text" class="case-text">
+        <div id="case4text" class="case-text" onclick="displayData(4)">
             <p>Did the U.S. Court of Appeals for the Ninth Circuit err in approving the award of assets to creditors of former Philippine President Ferdinand Marcos when the Philippine government, claiming rightful ownership of the assets, excluded itself from the proceedings based on sovereign immunity?</p>
         </div>
     </div>
     <div id="case5" class="case" style="left: 800px">
         <div id="case5header" class="case-header">Palazzolo v. Rhode Island</div>
-        <div id="case5text" class="case-text">
+        <div id="case5text" class="case-text" onclick="displayData(5)">
             <p>May a property owner who acquired title to the property after it was subject to wetlands regulations still bring a takings claim under the Fifth Amendment?</p>
         </div>
     </div>
     <script src="game/Draggable.js"></script>
-
+        <button id="submit">Submit</button>
 
 </div>
+<div id="case-info" hidden="hidden">
+    <span style="display: flex;justify-content: flex-end">    <span onclick="closeCaseData()" style="offset-anchor: right; top:0; cursor: pointer; background: white; color: black;   font: normal 1em/1 Arial, sans-serif; font-size: 20px">&#10006;</span>
+</span>
+    <div id="case-title" style="font-size: 35px; margin-bottom: 10px">Test</div>
+    <span class="data-header">Facts</span>
+    <div id="case-facts">Facts</div>
+    <span class="data-header">Question</span>
+    <div id="case-question">Question</div>
+    <span class="data-header">Conclusion</span>
+    <div id="case-ruling">Ruling</div>
 
+</div>
+<div class="source">
+    All data is sourced from &nbsp; <a href="https://www.oyez.com" style=color:inherit; target="_blank">Oyez</a> &nbsp; under a Creative Commons license.
+</div>
 
 </body>
 </html>
