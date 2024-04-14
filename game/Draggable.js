@@ -2,6 +2,7 @@ var locations = [document.getElementById("case1"),document.getElementById("case2
 for(e in locations){
     dragElement(locations[e])
 }
+let submitted = false;
 var positions = [[200,200], [400,200], [600,200],[800,200],[1000,200]]
 let cases = [null,null,null,null,null]
 reorder(null)
@@ -124,6 +125,7 @@ function loadCase(json,number){
 }
 
 function displayData(caseNumber){
+    showingInfo = true;
     for(el in locations){
         locations[el].hidden = true;
     }
@@ -138,11 +140,82 @@ function displayData(caseNumber){
 
 }
 function closeCaseData(){
-    let data = document.getElementById("case-info");
-    document.getElementById("submit").hidden=false;
-    data.hidden=true;
-    for(el in locations){
-        locations[el].hidden = false;
+    if(showingInfo && window.getComputedStyle(document.getElementById("case-info"),null).getPropertyValue("opacity") == 1) {
+        let data = document.getElementById("case-info");
+        if (!submitted)
+            document.getElementById("submit").hidden = false;
+        data.hidden = true;
+        for (el in locations) {
+            locations[el].hidden = false;
+        }
+        showingInfo = false;
     }
+
+}
+function submitToRuling(){
+    submitted = true;
+    document.getElementById("submit").hidden=true;
+    for(el in locations){
+        console.log(el)
+        console.log(locations[el])
+        let header = document.getElementById(locations[el].id + "header");
+       header.onmousedown = null;
+        header.style.cursor = "auto";
+    }
+    let years = [];
+    for(data in cases){
+        let year =cases[data].citation.year;
+        if(year == null){
+            year = cases[data].term;
+        }
+        years.push(year);
+    }
+    let sortedYears = [...years].sort();
+    let order = [];
+    for(let pos in locations){
+        order.push(parseInt(locations[pos].id.replace("case","")));
+    }
+    for (let i = 0; i < 5; i++) {
+        let year =cases[order[i] - 1].citation.year;
+        if(year == null){
+            year =cases[order[i] - 1].term;
+        }
+        years.push(year);
+        if(!(year === sortedYears[i])){
+            let correctOrder = [];
+            for(let c = 0; c < 5; c++){
+                for(let j = 0; j < correctOrder.length; j++){
+                    if(years[correctOrder[j]] >= years[c]){
+                        let insertAt = j;
+                        let newOrder = [];
+                        for(let a = 0; a < correctOrder.length; a++){
+                            if(insertAt === a){
+                                newOrder.push(c);
+                            }
+                            newOrder.push(correctOrder[a]);
+                        }
+                        if(newOrder.length === correctOrder.length){
+                            newOrder.push(c);
+                        }
+                        correctOrder = newOrder
+                        break;
+                    }
+                }
+                if(correctOrder.length === c){
+                    correctOrder.push(c);
+                }
+            }
+            correctErrors(order,correctOrder,years);
+            return;
+        }
+    }
+    celebrate();
+}
+function celebrate(){
+
+}
+function correctErrors(order, correctOrder,years){
+    console.log(years)
+    console.log(correctOrder)
 
 }

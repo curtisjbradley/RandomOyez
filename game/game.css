@@ -43,6 +43,7 @@
     background-color: #023047;
     color: white;
     animation: fade-in 2s;
+    overflow-y: scroll;
 
 }
 #submit{

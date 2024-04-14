@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
     <meta charset="UTF-8">
     <title>Game</title>
@@ -7,6 +7,7 @@
 
     <link href="game/game.css" rel="stylesheet">
     <script>
+        let showingInfo = false;
         for(let i = 1; i<= 5; i++){
             getRandomCase(cb => loadCase(cb,i))
         }
@@ -14,7 +15,7 @@
 
 </head>
 
-<body>
+<body onclick="closeCaseData()">
 
 <div id="case-container">
     <div id="case1" class="case">
@@ -48,11 +49,12 @@
         </div>
     </div>
     <script src="game/Draggable.js"></script>
-        <button id="submit">Submit</button>
+        <button id="submit" onclick="submitToRuling()">Submit</button>
 
 </div>
 <div id="case-info" hidden="hidden">
-    <span style="display: flex;justify-content: flex-end">    <span onclick="closeCaseData()" style="offset-anchor: right; top:0; cursor: pointer; background: white; color: black;   font: normal 1em/1 Arial, sans-serif; font-size: 20px">&#10006;</span>
+  <!--  <span style="display: flex;justify-content: flex-end;">    <span onclick="closeCaseData()" style="offset-anchor: right; top:0; cursor: pointer; background: white; color: black;   font: normal 1em/1 Arial, sans-serif; font-size: 20px"; >&#10006;</span>
+  !-->
 </span>
     <div id="case-title" style="font-size: 35px; margin-bottom: 10px">Test</div>
     <span class="data-header">Facts</span>
