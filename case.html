@@ -5,6 +5,27 @@
     <link href="case.css" rel="stylesheet">
     <title>Case Data</title>
     <script src="Oyezfetch.js"></script>
+    <script src="Oyezdisplay.js"></script>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const term = params.get("term");
+        const docket = params.get("docket");
+
+        if(term != null && docket!= null){
+            getCase(term,docket, data =>{if(data == null) {displayRandomCase()} else {updateCase()}});
+        } else {
+            displayRandomCase()
+        }
+
+        populateTerms()
+        window.addEventListener("resize", function(event){
+            document.getElementById("case-data").style.marginTop = document.getElementById("header").offsetHeight + 50+ "px";
+        })
+        window.addEventListener('popstate', function(event) {
+            updateCase()
+        });
+    </script>
+
 
 
 </head>
