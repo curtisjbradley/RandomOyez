@@ -10,7 +10,7 @@ if(term != null && docket!= null){
 
 populateTerms()
 window.addEventListener("resize", function(event){
-    document.getElementById("case-data").style.marginTop = document.getElementById("header").offsetHeight + "px";
+    document.getElementById("case-data").style.marginTop = document.getElementById("header").offsetHeight + 50+ "px";
 })
 window.addEventListener('popstate', function(event) {
        updateCase()
@@ -71,7 +71,7 @@ function getCase(term,docket, callback) {
         const params = new URLSearchParams(window.location.search);
         let url = "https://www.oyez.org/cases/" + params.get("term") + "/" + params.get("docket")
         document.getElementById("name").innerText = json.name
-        document.title = json.name + "(" + json.citation.year + ")"
+        document.title = json.name + " (" + json.citation.year + ")"
         document.getElementById("question").innerHTML = json.question;
         document.getElementById("name").setAttribute("href", url);
         document.getElementById("facts").innerHTML = json.facts_of_the_case
