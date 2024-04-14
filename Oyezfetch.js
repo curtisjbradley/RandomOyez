@@ -1,5 +1,5 @@
 function getCase(term,docket, callback) {
-        fetch("./terms/"+ term + ".json")
+        fetch("./randomcase/terms/"+ term + ".json")
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');

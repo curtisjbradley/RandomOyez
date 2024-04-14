@@ -1,0 +1,25 @@
+.case {
+    width: 150px;
+    height: 250px;
+    position:absolute;
+    font-size: 50px;
+    z-index:9;
+    border: black dashed 2px;
+    background: white;
+    top:200px;
+}
+.case-header{
+    cursor: move;
+    background: blue;
+    color: white;
+    padding: 10px;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+}
+.case-text{
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

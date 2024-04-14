@@ -1,7 +1,7 @@
 
 function displayRandomCase(){
 
-    fetch('./cases.json').then(data => data.json()).then(json => {
+    fetch('./randomcase/cases.json').then(data => data.json()).then(json => {
         const year_int = Math.floor(Math.random() * Object.keys(json).length);
         const year = Object.keys(json)[year_int];
         const docket = json[year][Math.floor(Math.random() * json[year].length)];
@@ -69,7 +69,7 @@ function pullCase(){
 
 }
 function populateTerms(){
-    fetch('./cases.json').then(data => data.json()).then(json =>{
+    fetch('./randomcase/cases.json').then(data => data.json()).then(json =>{
         var termlist = document.getElementById("term-list");
 
         for(let i in json){
@@ -82,7 +82,7 @@ function populateTerms(){
 
 }
 function populateDockets(){
-    fetch('./cases.json').then(data => data.json()).then(json => json[document.getElementById("term-list").value]).then(json =>{
+    fetch('./randomcase/cases.json').then(data => data.json()).then(json => json[document.getElementById("term-list").value]).then(json =>{
         var docketlist = document.getElementById("docket-list");
         docketlist.innerHTML = '';
         document.getElementById("explore-case").disabled=true
