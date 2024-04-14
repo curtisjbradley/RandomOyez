@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="case.css" rel="stylesheet">
+    <title>Case Data</title>
+    <script src="Oyezfetch.js"></script>
+
+
+</head>
+
+
+<body class="body">
+
+<div class="header" id="header">
+    <a href="index.html" class="name" style="left: 0; margin:0; text-decoration: none;text-emphasis: white">⌂</a>
+    <a id="name" target="_blank" class="name" style="margin-left: 0"></a>
+    <span id="year" class="year"></span>
+</div>
+
+<div class="case-data" id="case-data"><h1>Facts of The Case</h1>
+    <div id="facts" class="facts"></div>
+    <h1>Question</h1>
+    <div id="question" class="question"></div>
+    <h1> Conclusion</h1>
+    <div id="conclusion" class="conclusion"></div>
+    <div id="ruling">
+    <h1>Rulings</h1>
+    Majority:
+    <span id="majority" class="majority"></span>
+    <div id="dissenting" class="dissenting">
+        Dissenting:
+        <span id="minority" class="minority"></span>
+    </div>
+    <div>
+        No Vote:
+        <span id="no-vote" class="no-vote"></span>
+    </div>
+    </div>
+</div>
+<footer id="footer" class="case-explorer">
+    <div>
+    <button class="new_case" style="margin-right: 100px" onclick="displayRandomCase()">Open Random Case</button>
+    <span>
+         <label for="term-list">Term: </label>
+    <select id="term-list" onchange="populateDockets()"></select>
+    </span>
+    <span style="margin-left: 25px; margin-right: 25px">
+            <label for="docket-list">Docket:</label>
+    <select id="docket-list" onchange="document.getElementById('explore-case').disabled=false"
+            disabled="disabled"></select>
+    </span>
+
+
+    <button id="explore-case" onclick="pullCase()" style="margin-left: 25px" disabled="disabled">Explore Case</button>
+    </div>
+
+</footer>
+<div class="source">
+    All data is sourced from &nbsp; <a href="https://www.oyez.com" style=color:inherit; target="_blank">Oyez</a> &nbsp; under a Creative Commons license.
+</div>
+</body>
+
+</html>
